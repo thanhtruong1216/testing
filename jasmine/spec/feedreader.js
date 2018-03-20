@@ -21,7 +21,7 @@ $(() => {
         expect(feed.url).toBeDefined();
         expect(feed.url).toEqual(jasmine.any(String));
         expect(feed.url.length).toBeGreaterThan(0);
-      })
+      });
     });
 
     /* This test loops through all feeds of allFeeds
@@ -37,7 +37,7 @@ $(() => {
         expect(feed.name).toBeDefined();
         expect(feed.name).toEqual(jasmine.any(String));
         expect(feed.name.length).toBeGreaterThan(0);
-      })
+      });
     });
   });
 
@@ -89,7 +89,7 @@ $(() => {
       loadFeed(0,() => {
         originalContent = $('.feed').html();
         done();
-      })
+      });
     });
     // Update page content when new feed is added, use done() method to completed loadFeed function work
     it('Content actually changes when a new feed is loaded', (done) => {
