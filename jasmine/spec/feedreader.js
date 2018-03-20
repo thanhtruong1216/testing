@@ -1,19 +1,19 @@
 
 // Placing all of tests within the $() function to ensure all test don't run until the DOM is ready.
 
-$(function () {
+$(() => {
   /* This is our first test suite - a test suite just contains
   * a related set of tests. This suite is all about the RSS
   * feeds definitions, the allFeeds variable in our application.
   */
   describe('RSS Feeds', () => {
-    // To make sure that the allFeeds variable has been defined and that it is not empty. 
+    // To make sure that the allFeeds variable has been defined and that it is not empty.
     it('AllFeeds variable has been defined and it is not empty', () => {
       expect(allFeeds).toBeDefined();
       expect(allFeeds.length).toBeGreaterThan(0);
     });
 
-    /* Loops through each feed in the allFeeds object and ensures 
+    /* Loops through each feed in the allFeeds object and ensures
        each object has a URL defined and that the URL is not empty.
      */
     it('URL has been defined and it is not empty', () => {
@@ -23,7 +23,7 @@ $(function () {
       }
     })
 
-    /* This test loops through all feeds of allFeeds 
+    /* This test loops through all feeds of allFeeds
      * and ensures that each feed has a name defined
      * and its name is not empty.
      */
@@ -42,7 +42,7 @@ $(function () {
     it('The menu element is hidden by default', () => {
       expect($('body').hasClass('menu-hidden')).toBeTruthy();
     })
-     /* This test ensures the menu changes visibility when the menu icon is clicked. 
+     /* This test ensures the menu changes visibility when the menu icon is clicked.
       * This test has two expectations: does the menu display when
       * clicked and does it hide when clicked again.
     */
@@ -58,15 +58,15 @@ $(function () {
 
   // Defined test suite "Initial Entries"
   describe('Initial Entries', () => {
-    /* Use Jasmine's beforeEach method and asynchronous done() function 
+    /* Use Jasmine's beforeEach method and asynchronous done() function
       to ensure loadFeed function is called and completes its work
-    */ 
+    */
     beforeEach((done) => {
       loadFeed(0, () => {
         done();
       })
     })
-    /* If loadFeed function is called and completed it's work, 
+    /* If loadFeed function is called and completed it's work,
       ensures that there is at least a single entry within feed container
     */
     it('At least a single entry element within the feed container', () => {
@@ -89,7 +89,7 @@ $(function () {
         expect(currentContent).not.toEqual(originalContent);
         done();
       });
-    }); 
+    });
   });
 
-}());
+});
