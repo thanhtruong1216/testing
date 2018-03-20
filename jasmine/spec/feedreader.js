@@ -21,7 +21,7 @@ $(() => {
         expect(allFeeds[i].url).toBeDefined();
         expect(allFeeds[i].url).not.toBe(0);
       }
-    })
+    });
 
     /* This test loops through all feeds of allFeeds
      * and ensures that each feed has a name defined
@@ -32,7 +32,7 @@ $(() => {
         expect(allFeeds[i].name).toBeDefined();
         expect(allFeeds[i].name).not.toBe('');
       }
-    })
+    });
   });
 
 
@@ -41,8 +41,8 @@ $(() => {
     // This test ensures the menu element is hidden by default
     it('The menu element is hidden by default', () => {
       expect($('body').hasClass('menu-hidden')).toBeTruthy();
-    })
-     /* This test ensures the menu changes visibility when the menu icon is clicked.
+    });
+    /* This test ensures the menu changes visibility when the menu icon is clicked.
       * This test has two expectations: does the menu display when
       * clicked and does it hide when clicked again.
     */
@@ -51,8 +51,8 @@ $(() => {
         expect($('body').hasClass('menu-hidden')).toBeFalsy();
       $('.menu-icon-link').click();
         expect($('body').hasClass('menu-hidden')).toBeTruthy();
-    })
-  })
+    });
+  });
 
 
 
@@ -64,15 +64,15 @@ $(() => {
     beforeEach((done) => {
       loadFeed(0, () => {
         done();
-      })
-    })
+      });
+    });
     /* If loadFeed function is called and completed it's work,
       ensures that there is at least a single entry within feed container
     */
     it('At least a single entry element within the feed container', () => {
       expect($('.entry').length).toBeGreaterThan(0);
-    })
-  })
+    });
+  });
 
 
   // Defined a test suite "New Feed Selection"
@@ -81,7 +81,7 @@ $(() => {
     // Use beforeAll method to ensure the original content of page is loaded
     beforeAll(() => {
       originalContent = $('.feed').html();
-    })
+    });
     // Update page content when new feed is added, use done() method to completed loadFeed function work
     it('Content actually changes when a new feed is loaded', (done) => {
       loadFeed(1, () => {
