@@ -17,10 +17,11 @@ $(() => {
        each object has a URL defined and that the URL is not empty.
      */
     it('URL has been defined and it is not empty', () => {
-      for(let i = 0; i < allFeeds.length; i++) {
-        expect(allFeeds[i].url).toBeDefined();
-        expect(allFeeds[i].url).not.toBe(0);
-      }
+      allFeeds.forEach((feed) => {
+        expect(feed.url).toBeDefined();
+        expect(feed.url).toEqual(jasmine.any(String));
+        expect(feed.url.length).toBeGreaterThan(0);
+      })
     });
 
     /* This test loops through all feeds of allFeeds
@@ -28,10 +29,15 @@ $(() => {
      * and its name is not empty.
      */
     it('Name has been defined and it is not empty', () => {
-      for(let i = 0; i < allFeeds.length; i++) {
-        expect(allFeeds[i].name).toBeDefined();
-        expect(allFeeds[i].name).not.toBe('');
-      }
+      // for(let i = 0; i < allFeeds.length; i++) {
+      //   expect(allFeeds[i].name).toBeDefined();
+      //   expect(allFeeds[i].name).not.toBe('');
+      // }
+      allFeeds.forEach((feed) => {
+        expect(feed.name).toBeDefined();
+        expect(feed.name).toEqual(jasmine.any(String));
+        expect(feed.name.length).toBeGreaterThan(0);
+      })
     });
   });
 
@@ -40,7 +46,7 @@ $(() => {
   describe('The menu', () => {
     // This test ensures the menu element is hidden by default
     it('The menu element is hidden by default', () => {
-      expect($('body').hasClass('menu-hidden')).toBeTruthy();
+      expect($('body').hasClass('menu-hidden')).toBe(true);
     });
     /* This test ensures the menu changes visibility when the menu icon is clicked.
       * This test has two expectations: does the menu display when
@@ -48,9 +54,9 @@ $(() => {
     */
     it('Menu change visibility when the menu icon is clicked', () => {
       $('.menu-icon-link').click();
-        expect($('body').hasClass('menu-hidden')).toBeFalsy();
+        expect($('body').hasClass('menu-hidden')).toBe(false);
       $('.menu-icon-link').click();
-        expect($('body').hasClass('menu-hidden')).toBeTruthy();
+        expect($('body').hasClass('menu-hidden')).toBe(true);
     });
   });
 
@@ -70,7 +76,7 @@ $(() => {
       ensures that there is at least a single entry within feed container
     */
     it('At least a single entry element within the feed container', () => {
-      expect($('.entry').length).toBeGreaterThan(0);
+      expect($('.feed .entry').length).toBeGreaterThan(0);
     });
   });
 
@@ -79,8 +85,11 @@ $(() => {
   describe('New Feed Selections', () => {
     let originalContent;
     // Use beforeAll method to ensure the original content of page is loaded
-    beforeAll(() => {
-      originalContent = $('.feed').html();
+    beforeAll((done) => {
+      loadFeed(0,() => {
+        originalContent = $('.feed').html();
+        done();
+      })
     });
     // Update page content when new feed is added, use done() method to completed loadFeed function work
     it('Content actually changes when a new feed is loaded', (done) => {
