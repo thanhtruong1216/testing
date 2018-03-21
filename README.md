@@ -1,5 +1,12 @@
+# How to run test:
 
-# Specific test suit
+    Open file `index.html` in browser
+
+    All the tests are in `jasmine/spec/feedreader.js` file.
+
+
+# Test suits
+
 
 1. RSS Feeds test suit
 
@@ -29,7 +36,7 @@
 
 4. New Feed Selections test suit
 
-    - Use `beforeAll` method to to capture the original content.
+    - Use `beforeEach` method to ensure the original content and current content are loaded before they are tested.
 
     - Use `not.toEqual()` method to compare new content and the original content.
 
