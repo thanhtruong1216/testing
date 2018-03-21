@@ -87,7 +87,7 @@ $(() => {
         loadFeed(1, () => {
           currentContent = $('.feed').html();
           done();
-        })
+        });
       });
     });
     // Compare current content and original content, call done() method to completed loadFeed function work
