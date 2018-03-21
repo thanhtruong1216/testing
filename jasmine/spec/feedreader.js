@@ -13,7 +13,7 @@ $(() => {
       expect(allFeeds.length).toBeGreaterThan(0);
     });
 
-    /* Loops through each feed in the allFeeds object and ensures
+    /* This test loops through each feed in the allFeeds object and ensures
        each object has a URL defined and that the URL is not empty.
      */
     it('URL has been defined and it is not empty', () => {
@@ -29,10 +29,6 @@ $(() => {
      * and its name is not empty.
      */
     it('Name has been defined and it is not empty', () => {
-      // for(let i = 0; i < allFeeds.length; i++) {
-      //   expect(allFeeds[i].name).toBeDefined();
-      //   expect(allFeeds[i].name).not.toBe('');
-      // }
       allFeeds.forEach((feed) => {
         expect(feed.name).toBeDefined();
         expect(feed.name).toEqual(jasmine.any(String));
@@ -54,12 +50,11 @@ $(() => {
     */
     it('Menu change visibility when the menu icon is clicked', () => {
       $('.menu-icon-link').click();
-        expect($('body').hasClass('menu-hidden')).toBe(false);
+        expect($('body .menu-hidden').hasClass('menu-hidden')).toBe(false);
       $('.menu-icon-link').click();
         expect($('body').hasClass('menu-hidden')).toBe(true);
     });
   });
-
 
 
   // Defined test suite "Initial Entries"
@@ -84,17 +79,20 @@ $(() => {
   // Defined a test suite "New Feed Selection"
   describe('New Feed Selections', () => {
     let originalContent;
-    // Use beforeAll method to ensure the original content of page is loaded
-    beforeAll((done) => {
-      loadFeed(0,() => {
+    let currentContent;
+    // Use beforeEach method to ensure the original content and current content of page is loaded
+    beforeEach((done) => {
+      loadFeed(0, () => {
         originalContent = $('.feed').html();
-        done();
+        loadFeed(1, () => {
+          currentContent = $('.feed').html();
+          done();
+        })
       });
     });
-    // Update page content when new feed is added, use done() method to completed loadFeed function work
+    // Compare current content and original content, call done() method to completed loadFeed function work
     it('Content actually changes when a new feed is loaded', (done) => {
       loadFeed(1, () => {
-        let currentContent = $('.feed').html();
         expect(currentContent).not.toEqual(originalContent);
         done();
       });
